@@ -8,7 +8,7 @@ import Utilisateur from './Utilisateur';
 export default function Appli() {
 
   return (
-    // 1)  Si un utilisateur est connecté : 
+    // 1)  Si un utilisateur est connecté : il faut modifier 
       // <div className="Appli">
       //   <header className="appli-entete">
       //     <img src={logo} className="appli-logo" alt="Memo" />
