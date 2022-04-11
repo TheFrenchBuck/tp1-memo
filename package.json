@@ -2,7 +2,8 @@
   "name": "memo-tp1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://thefrenchbuck.github.io/tp1-memo/",
+  "homepage": "https://thefrenchbuck.github.io/tp1-memo",
+  "homepage-aide": "Avant de déployer sur GitHub Pages vous devez configurer correctement la propriété homepage ci-dessus : 1) retirer le suffixe '-inactif' de l'étiquette, et 2) remplacer le nom de compte et le nom de dépôt GitHub par les vôtres dans la valeur de la propriété.",
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
@@ -16,6 +17,8 @@
     "react-scripts": "5.0.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,7 +37,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage-aide": "Avant de déployer sur GitHub Pages vous devez configurer correctement la propriété homepage ci-dessus : 1) retirer le suffixe '-inactif' de l'étiquette, et 2) remplacer le nom de compte et le nom de dépôt GitHub par les vôtres dans la valeur de la propriété."
+  }
+  
  
 }
