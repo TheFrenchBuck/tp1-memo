@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "preghdeploy": "npm run build",
-    "ghdeploy": "gh-pages -b master -d build"
+    "ghdeploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
