@@ -5,6 +5,7 @@ import Taches from './Taches';
 import Accueil from './Accueil';
 import Utilisateur from './Utilisateur';
 import { useState, useEffect } from 'react';
+import * as tacheModele from '../code/tache-modele';
 import { observerEtatConnexion } from '../code/utilisateur-modele';
 
 export default function Appli() {
@@ -12,6 +13,15 @@ export default function Appli() {
   const[utilisateur, setUtilisateur] = useState(null);
   // état des tache
   const [taches, setTaches] = useState([]);
+
+  function gererAjoutTache(texte){
+   //code firestore
+    tacheModele.creer(utilisateur.uid,{
+      texte: texte,
+    }).then(
+      doc => setTaches([{id: doc.id, ...doc.data()}, ...taches])
+    );
+  }
   
   // surveiller l'état de la connexion
   useEffect(() => observerEtatConnexion(setUtilisateur),[]);
@@ -23,7 +33,7 @@ export default function Appli() {
           <img src={logo} className="appli-logo" alt="Memo" />
           <Utilisateur utilisateur={utilisateur} />
         </header>
-        <Taches utilisateur={utilisateur} taches={taches} setDossiers={setTaches}/>
+        <Taches utilisateur={utilisateur} taches={taches} setTaches={setTaches} gererAjoutTache={gererAjoutTache}/>
         <Controle utilisateur={utilisateur}/>
       </div>
 

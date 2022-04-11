@@ -1,9 +1,12 @@
 import Tache from './Tache';
 import { useEffect } from 'react';
+import { useState } from 'react';
 import './Taches.scss';
 import * as tacheModele from '../code/tache-modele';
 
-export default function Taches({utilisateur,taches,setTaches}) {
+
+export default function Taches({gererAjoutTache,utilisateur,taches,setTaches}) {
+  const [tache, setTexte] = useState('');
 // Lire les dossiers (de l'utilisateur connecté) dans Firestore
 useEffect(
   () => tacheModele.lireTout(utilisateur.uid).then(
@@ -11,27 +14,40 @@ useEffect(
   )
   , [utilisateur, setTaches]
 );
+
+
+function ajoutTache(event){
+  event.preventDefault();
+ setTexte("");
+ gererAjoutTache(tache);
+
+}
+
+
+
   return (
     <section className="Taches">
-      <form onSubmit={e => alert('À compléter')}>
+      <form onSubmit= {ajoutTache} >
         <input 
           type="text"   
           placeholder="Ajoutez une tâche ..." 
           name="texteTache"
           autoComplete="off" 
+          onChange={(e) => setTexte(e.target.value)}
+          id="tache"
+          value={tache}
+          
         />
       </form>
-      <ul className="liste-taches">
-      {
-        taches.map( 
-          // Remarquez l'utilisation du "spread operator" pour "étaler" les 
-          // propriétés de l'objet 'dossier' reçu en paramètre de la fonction
-          // fléchée dans les props du composant 'Dossier' !!
-          tache =>  <li key={tache.id}><Tache {...tache} /></li>
-        )
-      }
-        
-      </ul>
+      
+      <div className="liste-taches">
+        {
+          taches.map(
+            tache => <Tache key={tache.id} {...tache}/>
+          )
+        }
+      
+      </div>
     </section>
   );
 }

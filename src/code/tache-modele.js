@@ -8,7 +8,7 @@ import { listItemSecondaryActionClasses } from "@mui/material";
  * @returns {Promise<any[]>} Promesse avec le tableau des dossiers lorsque complétée
  */
 export async function lireTout(idUtilisateur) {
-    return getDocs(collection(bdFirestore, 'signets', idUtilisateur, 'dossiers')).then(
+    return getDocs(collection(bdFirestore, 'memo', idUtilisateur, 'taches')).then(
         res => res.docs.map(doc => ({id: doc.id, ...doc.data()}))
     );
 }
@@ -23,9 +23,9 @@ export async function creer(idUtilisateur, tache) {
     // On ajoute dateModif à l'objet tache
     // Remarquez que nous utilisons l'objet Timestamp de Firestore pour obtenir
     // un objet date contenant le temps au serveur...
-    dossier.dateModif = Timestamp.now();
+    tache.date = Timestamp.now();
     // Référence à la collection dans laquelle on veut ajouter le dossier
-    let coll = collection(bdFirestore, 'taches', idUtilisateur, 'taches');
+    let coll = collection(bdFirestore, 'memo', idUtilisateur, 'taches');
     // Ajout du dossier avec addDoc : retourne une promesse contenant une 
     // "référence" Firestore au document ajouté
     let refDoc = await addDoc(coll, tache);
